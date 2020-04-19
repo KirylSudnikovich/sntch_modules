@@ -15,6 +15,7 @@
         'views/res_config_settings_views.xml',
         'views/res_partner_views.xml'
     ],
+    'images': ['static/description/banner.png'],
     'post_init_hook': '_initial_setup',
     'license': "AGPL-3",
     'installable': True,
