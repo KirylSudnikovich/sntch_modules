@@ -7,7 +7,7 @@
     'maintainer': 'Kirill Sudnikovich',
     'website': "https://sntch.dev",
     'category': 'Contacts',
-    'version': '13.0.0.0.0',
+    'version': '12.0.0.0.0',
     'depends': ['base', 'contacts'],
     'data': [
         'data/ir_cron_data.xml',
