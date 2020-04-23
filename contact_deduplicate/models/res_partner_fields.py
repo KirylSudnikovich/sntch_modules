@@ -12,9 +12,8 @@ class ResPartnerField(models.Model):
 
     def _update_res_partner_fields(self):
         fields = self.env['res.partner'].fields_get()
-        for k, v in fields.items():
-            name = v.get('string', None)
-            field = k
+        for field, value in fields.items():
+            name = value.get('string', None)
             if name:
                 exists = self.env['res.partner.fields'].search([('name', '=', name), ('field', '=', field)])
                 if not exists:

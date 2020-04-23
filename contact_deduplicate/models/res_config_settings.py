@@ -16,9 +16,10 @@ class ResConfigSettings(models.TransientModel):
     def set_values(self):
         self.ensure_one()
         super(ResConfigSettings, self).set_values()
-        self.env['ir.config_parameter'].sudo().set_param('contact_deduplicate.duplicate_check', self.duplicate_check)
-        self.env['ir.config_parameter'].sudo().set_param('contact_deduplicate.duplicate_check_fields', self.duplicate_check_fields.ids)
-        self.env['ir.config_parameter'].sudo().set_param('contact_deduplicate.user_whitelist', self.user_whitelist.ids)
+        set_param = self.env['ir.config_parameter'].sudo().set_param
+        set_param('contact_deduplicate.duplicate_check', self.duplicate_check)
+        set_param('contact_deduplicate.duplicate_check_fields', self.duplicate_check_fields.ids)
+        set_param('contact_deduplicate.user_whitelist', self.user_whitelist.ids)
 
     @api.model
     def get_values(self):
