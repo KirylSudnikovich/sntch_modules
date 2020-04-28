@@ -11,6 +11,7 @@ class ResCompany(models.Model):
     api_key = fields.Char()
     api_secret = fields.Char()
     status = fields.Char(readonly=True)
+    user_id = fields.Char(string="Zoom User ID", readonly=True)
 
     def check_zoom_creds(self):
         token = self.generate_jwt(self.api_key, self.api_secret)
@@ -23,11 +24,12 @@ class ResCompany(models.Model):
 
         conn.request("GET", "/v2/users?status=active&page_size=30&page_number=1", headers=headers)
         res = conn.getresponse()
+        data = res.read().decode("UTF-8")
+        data = ast.literal_eval(data)
         if res.code == 200:
             self.status = "OK"
+            self.user_id = data['users'][0]['id']
         else:
-            data = res.read().decode("UTF-8")
-            data = ast.literal_eval(data)
             self.status = data.get('message', 'Error')
 
     def generate_jwt(self, key, secret):
