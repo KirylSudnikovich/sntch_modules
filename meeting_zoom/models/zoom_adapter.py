@@ -31,7 +31,10 @@ class ResCompany(models.TransientModel):
     def create_meeting(self, meeting):
         token = self.generate_jwt(self.env.company.api_key, self.env.company.api_secret)
         body = {
-            'topic': meeting.name
+            'topic': meeting.name,
+            'duration': meeting.duration * 60,
+            'agenda': meeting.description,
+            'start_time': meeting.start_datetime.strftime("%Y-%m-%dT%H:%M:%SZ")
         }
         res = self.send_request("POST", f"users/{self.env.company.user_id}/meetings", token, body)
         data = res.read().decode("UTF-8")

@@ -8,9 +8,10 @@
     'website': "https://sntch.dev",
     'category': 'CRM',
     'version': '13.0.0.0.0',
-    'depends': ['base'],
+    'depends': ['base', 'calendar'],
     'data': [
-        'views/res_company_views.xml'
+        'views/res_company_views.xml',
+        'views/calendar_event_views.xml'
     ],
     # 'images': ['static/description/banner.png'],
     'license': "AGPL-3",
