@@ -3,6 +3,7 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+from odoo.addons.phone_validation.tools import phone_validation
 
 
 class ResPartner(models.Model):
@@ -17,6 +18,7 @@ class ResPartner(models.Model):
         if not self._get_duplicate_check():
             res = super(ResPartner, self).create(vals)
         else:
+            res = super(ResPartner, self).create(vals)
             fields_to_check = self._get_duplicate_check_fields()
             if fields_to_check:
                 duplicates = self.find_duplicate_by_fields(vals, fields_to_check)
@@ -24,7 +26,6 @@ class ResPartner(models.Model):
                     dups_to_err = self.create_dups_error_message(fields_to_check, duplicates, vals)
                     str_to_err = self._create_error_str(dups_to_err)
                     raise UserError(_(str_to_err))
-                res = super(ResPartner, self).create(vals)
                 if duplicates and self.check_user_in_whitelist():
                     for duplicate_field in duplicates:
                         for duplicate in duplicate_field:
@@ -86,14 +87,40 @@ class ResPartner(models.Model):
             (f.field, '!=', False)]
         return domain
 
+    def plivo_phone_format(self, number=None, country=None, company=None):
+        country = country or self._phone_get_country()
+        if not country:
+            return number
+        return phone_validation.phone_format(
+            number,
+            country.code if country else None,
+            country.phone_code if country else None,
+            force_format='E164',
+            raise_exception=False
+        )
+
+    def find_dups_by_phone(self, vals_list, f):
+        dups = self.env['res.partner'].browse()
+        contacts = self.env['res.partner'].search([])
+        for contact in contacts:
+            phone = self.plivo_phone_format(contact.phone)[-9:] if contact.phone else False
+            mobile = self.plivo_phone_format(contact.mobile)[-9:] if contact.mobile else False
+            vals_phone = self.plivo_phone_format(vals_list.get(f.field))[-9:] if vals_list.get(f.field) else False
+            if vals_phone and (vals_phone == phone or vals_phone == mobile):
+                dups += contact
+        return dups
+
     def find_duplicate_by_fields(self, vals_list, fields_to_check):
         result = []
         self.env.context = dict(self.env.context)
         self.env.context['dup_fields'] = []
         res_partner_env = self.env['res.partner']
         for f in fields_to_check:
-            domain = self._get_duplicate_by_fields_domain(vals_list, f)
-            dups = res_partner_env.search(domain)
+            if f.field != 'phone' and f.field != 'mobile':
+                domain = self._get_duplicate_by_fields_domain(vals_list, f)
+                dups = res_partner_env.search(domain)
+            else:
+                dups = self.find_dups_by_phone(vals_list, f)
             if dups:
                 self.env.context['dup_fields'].append(f.field)
                 result.append(dups)
@@ -104,14 +131,29 @@ class ResPartner(models.Model):
             ('id', '!=', self.id), (f.field, '!=', False)]
         return domain
 
+    def find_dups_by_phone_object(self, f):
+        dups = self.env['res.partner'].browse()
+        contacts = self.env['res.partner'].search([])
+        for contact in contacts:
+            if contact.id != self.id:
+                phone = self.plivo_phone_format(contact.phone)[-9:] if contact.phone else False
+                mobile = self.plivo_phone_format(contact.mobile)[-9:] if contact.mobile else False
+                vals_phone = self.plivo_phone_format(getattr(self, f.field))[-9:] if getattr(self, f.field) else False
+                if vals_phone and (vals_phone == phone or vals_phone == mobile):
+                    dups += contact
+        return dups
+
     def find_duplicate_by_object(self, fields_to_check):
         result = []
         self.env.context = dict(self.env.context)
         self.env.context['dup_fields'] = []
         res_partner_env = self.env['res.partner']
         for f in fields_to_check:
-            domain = self._get_duplicate_by_object_domain(f)
-            dups = res_partner_env.search(domain)
+            if f.field != 'phone' and f.field != 'mobile':
+                domain = self._get_duplicate_by_object_domain(f)
+                dups = res_partner_env.search(domain)
+            else:
+                dups = self.find_dups_by_phone_object(f)
             if dups:
                 self.env.context['dup_fields'].append(f.field)
                 result.append(dups)

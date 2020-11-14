@@ -8,7 +8,7 @@
     'website': "https://sntch.dev",
     'category': 'Contacts',
     'version': '13.0.1.2.0',
-    'depends': ['base', 'contacts'],
+    'depends': ['base', 'contacts', 'phone_validation'],
     'data': [
         'data/ir_cron_data.xml',
         'security/ir.model.access.csv',
