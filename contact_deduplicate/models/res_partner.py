@@ -16,7 +16,6 @@ class ResPartner(models.Model):
         if not self._get_duplicate_check():
             res = super(ResPartner, self).create(vals)
         else:
-            res = super(ResPartner, self).create(vals)
             fields_to_check = self._get_duplicate_check_fields()
             if fields_to_check:
                 duplicates = self.find_duplicate_by_fields(vals, fields_to_check)
@@ -24,12 +23,15 @@ class ResPartner(models.Model):
                     dups_to_err = self.create_dups_error_message(fields_to_check, duplicates, vals)
                     str_to_err = self._create_error_str(dups_to_err)
                     raise UserError(_(str_to_err))
+                res = super(ResPartner, self).create(vals)
                 if duplicates and self.check_user_in_whitelist():
                     for duplicate_field in duplicates:
                         for duplicate in duplicate_field:
                             if not duplicate.duplicate_have:
                                 duplicate.duplicate_have = True
                     res.duplicate_have = True
+            else:
+                res = super(ResPartner, self).create(vals)
         return res
 
     def write(self, vals):
