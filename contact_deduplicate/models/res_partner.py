@@ -116,7 +116,7 @@ class ResPartner(models.Model):
         return result
 
     def _get_duplicate_by_object_domain(self, f):
-        domain = [(f.field, '=', getattr(self, f.field)),
+        domain = [(f.field, '=ilike', getattr(self, f.field)),
             ('id', '!=', self.id), (f.field, '!=', False)]
         return domain
 
