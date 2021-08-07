@@ -9,7 +9,7 @@
     "depends": [
         "sale_stock",
         "hr",
-        "agreement",
+        "agreement_mlnk",
         # OCA-repository https://github.com/OCA/reporting-engine/tree/14.0
         "report_xlsx",
     ],

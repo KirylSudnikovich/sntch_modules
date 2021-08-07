@@ -1,0 +1,239 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* agreement_htm
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-18 15:43+0000\n"
+"PO-Revision-Date: 2021-01-18 15:43+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: agreement_htm
+#: code:addons/agreement_htm/models/agreement.py:0
+#, python-format
+msgid "%s (copy)"
+msgstr ""
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__message_needaction
+msgid "Action Needed"
+msgstr "Требует внимания"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__active
+msgid "Active"
+msgstr "Активно"
+
+#. module: agreement_htm
+#: model:ir.model,name:agreement_htm.model_agreement
+#: model_terms:ir.ui.view,arch_db:agreement_htm.agreement_form
+msgid "Agreement"
+msgstr "Договор"
+
+#. module: agreement_htm
+#: model_terms:ir.ui.view,arch_db:agreement_htm.agreement_form
+msgid "Agreement Name"
+msgstr "Название договора"
+
+#. module: agreement_htm
+#: model:ir.actions.act_window,name:agreement_htm.agreement_action
+#: model:ir.ui.menu,name:agreement_htm.agreement_menu
+#: model:ir.ui.menu,name:agreement_htm.agreement_menu_root
+#: model_terms:ir.ui.view,arch_db:agreement_htm.agreement_tree
+msgid "Agreements"
+msgstr "Договора"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__message_attachment_count
+msgid "Attachment Count"
+msgstr "Количество вложений"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__code
+msgid "Code"
+msgstr "Код"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__company_id
+msgid "Company"
+msgstr "Компания"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__create_uid
+msgid "Created by"
+msgstr "Создал"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__create_date
+msgid "Created on"
+msgstr "Создан"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__currency_id
+msgid "Currency"
+msgstr "Валюта"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__display_name
+msgid "Display Name"
+msgstr "Отображаемое имя"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__domain
+msgid "Domain"
+msgstr "Тип"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__end_date
+msgid "End Date"
+msgstr "Дата окончания"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__message_follower_ids
+msgid "Followers"
+msgstr "Подписчики"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Подписчики (Каналы)"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Подписчики (Партнеры)"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__id
+msgid "ID"
+msgstr "Идентификатор"
+
+#. module: agreement_htm
+#: model:ir.model.fields,help:agreement_htm.field_agreement__message_needaction
+#: model:ir.model.fields,help:agreement_htm.field_agreement__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Если отмечено, новые сообщения будут требовать вашего внимания."
+
+#. module: agreement_htm
+#: model:ir.model.fields,help:agreement_htm.field_agreement__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Если отмечено - некоторые сообщения имеют ошибку доставки."
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__message_is_follower
+msgid "Is Follower"
+msgstr "Подписчик"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement____last_update
+msgid "Last Modified on"
+msgstr "Последнее изменение"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__write_uid
+msgid "Last Updated by"
+msgstr "Последний раз обновил"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__write_date
+msgid "Last Updated on"
+msgstr "Последнее обновление"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Основное вложение"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__message_has_error
+msgid "Message Delivery error"
+msgstr "Ошибка доставки сообщения"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__message_ids
+msgid "Messages"
+msgstr "Сообщения"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__name
+msgid "Name"
+msgstr "Название"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__number
+msgid "Number"
+msgstr "Номер"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Количество действий"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__message_has_error_counter
+msgid "Number of errors"
+msgstr "Количество ошибок"
+
+#. module: agreement_htm
+#: model:ir.model.fields,help:agreement_htm.field_agreement__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Количество сообщений, требующих действия"
+
+#. module: agreement_htm
+#: model:ir.model.fields,help:agreement_htm.field_agreement__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Количество сообщений с ошибкой отправки"
+
+#. module: agreement_htm
+#: model:ir.model.fields,help:agreement_htm.field_agreement__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Количество непрочитанных сообщений"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__partner_id
+msgid "Partner"
+msgstr "Клиент"
+
+#. module: agreement_htm
+#: code:addons/agreement_htm/models/agreement.py:0
+#, python-format
+msgid "Purchase"
+msgstr "Закупка"
+
+#. module: agreement_htm
+#: code:addons/agreement_htm/models/agreement.py:0
+#, python-format
+msgid "Sale"
+msgstr "Продажа"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__signature_date
+msgid "Signature Date"
+msgstr "Дата Подписания"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__start_date
+msgid "Start Date"
+msgstr "Дата начала"
+
+#. module: agreement_htm
+#: model:ir.model.constraint,message:agreement_htm.constraint_agreement_code_partner_company_unique
+msgid "This agreement code already exists for this partner!"
+msgstr "Этот код договора уже используется!"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__message_unread
+msgid "Unread Messages"
+msgstr "Непрочитанные сообщения"
+
+#. module: agreement_htm
+#: model:ir.model.fields,field_description:agreement_htm.field_agreement__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Счетчик непрочитанных сообщений"
