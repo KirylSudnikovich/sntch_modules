@@ -1,0 +1,198 @@
+<odoo>
+    <record id="waybill_form" model="ir.ui.view">
+        <field name="name">stock.waybill.form</field>
+        <field name="model">stock.waybill</field>
+        <field name="arch" type="xml">
+            <form string="Накладная">
+                <header>
+                    <button
+                        name="action_confirm"
+                        attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}"
+                        string="Подтвердить"
+                        groups="base.group_user"
+                        class="btn-primary"
+                        type="object"
+                    />
+                    <button
+                        name="action_cancel"
+                        attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}"
+                        string="Отменить"
+                        groups="base.group_user"
+                        type="object"
+                    />
+                    <button
+                        name="action_draft"
+                        attrs="{'invisible': [('state', '!=', 'cancel')]}"
+                        string="Восстановить"
+                        groups="base.group_user"
+                        type="object"
+                    />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Название накладной"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group name="bill_type">
+                        <group>
+                            <field name="bill_type_id"/>
+                            <field name="supplement"/>
+                        </group>
+                    </group>
+                    <group name="main">
+                        <group name="left">
+                            <field name="series"/>
+                            <field name="number"/>
+                            <field name="currency_id"/>
+                            <field name="move_id" readonly="1"/>
+                        </group>
+                        <group name="right">
+                            <field name="date_waybill"/>
+                            <field name="agreement_id" readonly="1"/>
+                            <field name="sale_order_id" readonly="1"/>
+                            <field name="picking_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <group name="additional">
+                        <group name="left">
+                            <field name="company_id" required="True" string="Грузоотправитель" readonly="1"/>
+                            <field name="company_id_vat" string="УНП"/>
+                            <field name="company_id_info"/>
+                        </group>
+                        <group name="right">
+                            <field name="partner_id" required="True" string="Грузополучатель" readonly="1"/>
+                            <field name="partner_id_vat" string="УНП"/>
+                            <field name="partner_id_info"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="order_line_page" string="Содержимое" attrs="{'invisible': [('id', '=', False)]}">
+                            <field name="order_line" widget="section_and_note_one2many">
+                                <tree string="Содержимое" editable="bottom">
+                                    <control>
+                                    </control>
+                                    <field name="name"/>
+                                    <field name="product_uom"/>
+                                    <field name="product_uom_qty" string="Количество"/>
+                                    <field name="weight" string="Масса груза" attrs="{'column_invisible': [('parent.bill_type_id', '!=', 'ttn')]}"/>
+                                    <field name="capacity" string="Количество грузовых мест" attrs="{'column_invisible': [('parent.bill_type_id', '!=', 'ttn')]}"/>
+                                    <field name="price_unit" optional="hide"/>
+                                    <field name="price_unit_byn"/>
+                                    <field name="price_subtotal" optional="hide"/>
+                                    <field name="price_subtotal_byn"/>
+                                    <field name="tax_id" widget="many2many_tags" string="Ставка НДС, %"/>
+                                    <field name="price_tax" optional="hide"/>
+                                    <field name="price_tax_byn"/>
+                                    <field name="price_total" optional="hide"/>
+                                    <field name="price_total_byn"/>
+                                    <field name="note"/>
+                                </tree>
+                            </field>
+                            <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                    <field name="amount_total" widget="monetary"/>
+                                    <field name="amount_down" widget="monetary" options="{'currency_field': 'currency_id'}" string="В т.ч. сумма аванса:"/>
+                                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                        <label for="amount_total_byn"/>
+                                    </div>
+                                    <field name="amount_total_byn" nolabel="1" class="oe_subtotal_footer_separator"/>
+                                    <div class="oe_clear"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="other_info" string="Дополнительно">
+                            <group>
+                                <group string="Отпуск товара">
+                                    <field name="employee_id_2"/>
+                                    <field name="employee_id_1"/>
+                                    <field name="client_employee"/>
+                                    <field name="receipt"/>
+                                    <field name="receipt_author_id"/>
+                                </group>
+                                <group string="Транспорт" attrs="{'invisible': [('bill_type_id', '!=', 'ttn')]}">
+                                    <field name="payer"/>
+                                    <field name="car"/>
+                                    <field name="trailer"/>
+                                    <field name="drive_bill"/>
+                                    <field name="driver"/>
+                                </group>
+                                <group string="Погрузка" attrs="{'invisible': [('bill_type_id', '!=', 'ttn')]}">
+                                    <field name="from_partner_id"/>
+                                    <field name="to_partner_id"/>
+                                    <field name="company_id_landing_type"/>
+                                    <field name="partner_id_landing_type"/>
+                                </group>
+                                <group string="Приемка">
+                                    <field name="waybill_get_employee"/>
+                                    <field name="documents"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+  <record id="waybill_tree" model="ir.ui.view">
+        <field name="name">stock.waybill.tree</field>
+        <field name="model">stock.waybill</field>
+        <field name="arch" type="xml">
+            <tree string="Накладные" create="false">
+                <field name="series"/>
+                <field name="number"/>
+                <field name="bill_type_id"/>
+                <field name="date_waybill"/>
+                <field name="partner_id"/>
+                <field name="sale_order_id"/>
+                <field name="amount_total_byn"/>
+                <field name="state"
+                    decoration-success="state == 'done'"
+                    decoration-info="state == 'draft'"
+                    widget="badge" 
+                    optional="show"
+                />
+                <field name="company_id" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+  </record>
+
+    <record id="view_stock_waybill_filter" model="ir.ui.view">
+        <field name="name">stock.waybill.filter</field>
+        <field name="model">stock.waybill</field>
+        <field name="priority" eval="15"/>
+        <field name="arch" type="xml">
+            <search string="Search Waybill">
+                    <field name="partner_id" operator="child_of"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Контрагент" name="salesperson" domain="[]" context="{'group_by': 'partner_id'}"/>
+                        <filter name="date_waybill" string="Дата накладной" domain="[]" context="{'group_by': 'date_waybill'}"/>
+                        <filter string="Серия" name="series" domain="[]" context="{'group_by': 'series'}"/>
+                    </group>
+            </search>
+        </field>
+    </record>
+
+  <record id="stock_waybill_action" model="ir.actions.act_window">
+        <field name="name">Накладные</field>
+        <field name="res_model">stock.waybill</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_stock_waybill_filter"/>
+  </record>
+
+
+  <!-- Top menu item -->
+  <menuitem id="waybill_menu"
+        name="Накладные"
+        parent="stock.menu_stock_warehouse_mgmt"
+        sequence="0"
+        action="stock_waybill_action"
+  />
+</odoo>
