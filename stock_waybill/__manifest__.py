@@ -6,13 +6,16 @@
     "website": "https://malanka.eu",
     "category": "Inventory",
     "version": "14.0.0.3.8",
-    "license": "AGPL-3",
+    "price": "299.99",
+    "currency": "EUR",
+    "license": "OPL-1",
     "depends": [
         "sale_stock",
         "hr",
-        "agreement_mlnk",
+        # OCA-repository https://github.com/OCA/contract/tree/14.0/agreement
+        # "agreement",
         # OCA-repository https://github.com/OCA/reporting-engine/tree/14.0
-        "report_xlsx",
+        # "report_xlsx",
     ],
     "data": [
         "security/ir.model.access.csv",
