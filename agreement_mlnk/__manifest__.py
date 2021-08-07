@@ -4,6 +4,7 @@
     "summary": """Модуль для договоров внутри системы Odoo""",
     "author": "Kiryl Sudnikovich, Malanka OU",
     "website": "https://malanka.eu",
+    "license": "AGPL-3",
     "category": "Sales",
     "version": "14.0.0.0.1",
     "depends": [

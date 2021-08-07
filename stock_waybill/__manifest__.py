@@ -6,6 +6,7 @@
     "website": "https://malanka.eu",
     "category": "Inventory",
     "version": "14.0.0.3.8",
+    "license": "AGPL-3",
     "depends": [
         "sale_stock",
         "hr",
